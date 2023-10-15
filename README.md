@@ -32,7 +32,7 @@ There are five main use case scenarios in the system:
 5. **View Member Purchase History**  
     Gives a detailed history of purchases made by a member.
 
-![Insert use case diagrams here]
+![Use Case Diagram](https://i.ibb.co/1vYX3bK/Use-Cases-SE3351.png)
 
 ## Class Diagram
 
@@ -50,10 +50,6 @@ The following are the main classes in the system:
 ## Implementation
 
 The program starts with a main menu providing options such as Member Management, Item Management, Inventory Viewing, and Transaction Processing. Depending on the user's choice, different actions are performed. After each process, the user can return to the main menu or exit the application.
-
-To ensure stability, the code includes exception handling mechanisms to prevent unforeseen crashes.
-
-MAKE THIS AN IMAGE OF THE TERMINAL
 
 ## Usage
 
