@@ -159,3 +159,33 @@ def inventory_viewing():
     for item in Item.items:
         print(f"Item ID: {item.item_id}, Name: {item.name}, Price: ${item.price}")
 
+def transaction_processing():
+    member_id = int(input("Enter Member ID: "))
+    member = Member.find_member(member_id)
+    if not member:
+        print("Member not found!")
+        return
+
+    transaction_id = int(input("Enter Transaction ID: "))
+    items_in_transaction = []
+
+    while True:
+        item_id = int(input("Enter Item ID to add to the transaction (or -1 to finish): "))
+        if item_id == -1:
+            break
+
+        item = Item.find_item(item_id)
+        if item:
+            items_in_transaction.append(item.name)
+        else:
+            print("Item not found!")
+
+    Transaction(transaction_id, member, items_in_transaction)
+    print(f"Transaction {transaction_id} processed for member {member_id}!")
+
+
+if __name__ == "__main__":
+    try:
+        main_menu()
+    except Exception as e:
+        print(f"An error occurred: {e}")
