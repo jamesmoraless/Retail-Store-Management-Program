@@ -45,7 +45,7 @@ The following are the main classes in the system:
 - **Transaction**: Connects items with members, processes transactions.
 
 
-![alt text](https://ibb.co/qD6L2rb)
+![Class Diagram](https://i.ibb.co/TwyDNgz/UML-Diagram-SE3351.png)
 
 ## Implementation
 
