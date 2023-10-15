@@ -19,13 +19,56 @@ class Member:
             print(f"Transaction ID: {transaction.transaction_id}, Items: {transaction.items}")
 
 
+class Category:
+    categories = []
+
+    def __init__(self, name):
+        self.name = name
+        self.items = []
+        Category.categories.append(self)
+
+    def add_item(self, item):
+        self.items.append(item)
+
+    def remove_item(self, item):
+        self.items.remove(item)
+
+
+class Inventory:
+    @staticmethod
+    def view_all():
+        for item in Item.items:
+            print(f"Item ID: {item.item_id}, Name: {item.name}, Price: ${item.price}, Category: {item.category.name}")
+
+    @staticmethod
+    def view_by_category(category_name):
+        category = next((cat for cat in Category.categories if cat.name == category_name), None)
+        if not category:
+            print("Category not found!")
+            return
+        for item in category.items:
+            print(f"Item ID: {item.item_id}, Name: {item.name}, Price: ${item.price}")
+
+    @staticmethod
+    def search_by_id(item_id):
+        item = Item.find_item(item_id)
+        if item:
+            print(f"Item ID: {item.item_id}, Name: {item.name}, Price: ${item.price}, Category: {item.category.name}")
+        else:
+            print("Item not found!")
+
+
 class Item:
     items = []
 
-    def __init__(self, item_id, name, price):
+    def __init__(self, item_id, name, price, category_name):
         self.item_id = item_id
         self.name = name
         self.price = price
+        self.category = next((cat for cat in Category.categories if cat.name == category_name), None)
+        if not self.category:
+            self.category = Category(category_name)
+        self.category.add_item(self)
         Item.items.append(self)
 
     @staticmethod
@@ -34,6 +77,7 @@ class Item:
             if item.item_id == item_id:
                 return item
         return None
+
 
 
 class Transaction:
@@ -123,7 +167,8 @@ def item_management():
             item_id = int(input("Enter Item ID: "))
             name = input("Enter Item Name: ")
             price = float(input("Enter Item Price: "))
-            Item(item_id, name, price)
+            category = input("Enter Item Category: ")
+            Item(item_id, name, price, category)
             print(f"Item {name} added!")
 
         elif choice == "2":
@@ -132,8 +177,11 @@ def item_management():
             if item:
                 new_name = input("Enter New Item Name: ")
                 new_price = float(input("Enter New Item Price: "))
+                new_category = input("Enter New Category Name: ")
                 item.name = new_name
                 item.price = new_price
+                item.category = new_category
+
                 print(f"Item {item_id} updated!")
             else:
                 print("Item not found!")
@@ -155,9 +203,32 @@ def item_management():
 
 
 def inventory_viewing():
-    print("\nInventory Viewing")
-    for item in Item.items:
-        print(f"Item ID: {item.item_id}, Name: {item.name}, Price: ${item.price}")
+    while True:
+        print("\nInventory Viewing")
+        print("1. View All Items")
+        print("2. View Items by Category")
+        print("3. Search Item by ID")
+        print("4. Return to Main Menu")
+
+        choice = input("Enter Choice: ")
+
+        if choice == "1":
+            Inventory.view_all()
+
+        elif choice == "2":
+            category_name = input("Enter Category Name: ")
+            Inventory.view_by_category(category_name)
+
+        elif choice == "3":
+            item_id = int(input("Enter Item ID: "))
+            Inventory.search_by_id(item_id)
+
+        elif choice == "4":
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+
 
 def transaction_processing():
     member_id = int(input("Enter Member ID: "))
