@@ -44,7 +44,8 @@ The following are the main classes in the system:
 - **Inventory**: Manages items, including adding, removing, searching, and listing by category.
 - **Transaction**: Connects items with members, processes transactions.
 
-![Insert class diagram here]
+
+![alt text](https://ibb.co/qD6L2rb)
 
 ## Implementation
 
