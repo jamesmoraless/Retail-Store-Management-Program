@@ -67,3 +67,95 @@ def main_menu():
             break
         else:
             print("Invalid choice. Please try again.")
+
+def member_management():
+    while True:
+        print("\nMember Management")
+        print("1. Add Member")
+        print("2. Update Member")
+        print("3. View Purchase History")
+        print("4. Return to Main Menu")
+
+        choice = input("Enter Choice: ")
+
+        if choice == "1":
+            member_id = int(input("Enter Member ID: "))
+            name = input("Enter Member Name: ")
+            Member(member_id, name)
+            print(f"Member {name} added!")
+
+        elif choice == "2":
+            member_id = int(input("Enter Member ID to update: "))
+            member = Member.find_member(member_id)
+            if member:
+                new_name = input("Enter New Member Name: ")
+                member.name = new_name
+                print(f"Member {member_id} updated!")
+            else:
+                print("Member not found!")
+
+        elif choice == "3":
+            member_id = int(input("Enter Member ID to view purchase history: "))
+            member = Member.find_member(member_id)
+            if member:
+                member.view_purchase_history()
+            else:
+                print("Member not found!")
+
+        elif choice == "4":
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+
+
+def item_management():
+    while True:
+        print("\nItem Management")
+        print("1. Add Item")
+        print("2. Update Item")
+        print("3. Remove Item")
+        print("4. Return to Main Menu")
+
+        choice = input("Enter Choice: ")
+
+        if choice == "1":
+            item_id = int(input("Enter Item ID: "))
+            name = input("Enter Item Name: ")
+            price = float(input("Enter Item Price: "))
+            Item(item_id, name, price)
+            print(f"Item {name} added!")
+
+        elif choice == "2":
+            item_id = int(input("Enter Item ID to update: "))
+            item = Item.find_item(item_id)
+            if item:
+                new_name = input("Enter New Item Name: ")
+                new_price = float(input("Enter New Item Price: "))
+                item.name = new_name
+                item.price = new_price
+                print(f"Item {item_id} updated!")
+            else:
+                print("Item not found!")
+
+        elif choice == "3":
+            item_id = int(input("Enter Item ID to remove: "))
+            item = Item.find_item(item_id)
+            if item:
+                Item.items.remove(item)
+                print(f"Item {item_id} removed!")
+            else:
+                print("Item not found!")
+
+        elif choice == "4":
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+
+
+def inventory_viewing():
+    print("\nInventory Viewing")
+    for item in Item.items:
+        print(f"Item ID: {item.item_id}, Name: {item.name}, Price: ${item.price}")
+
