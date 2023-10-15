@@ -43,3 +43,27 @@ class Transaction:
         self.items = items
         member.purchase_history.append(self)
 
+def main_menu():
+    while True:
+        print("Welcome to the Retail Store Management Program!")
+        print("1. Member Management")
+        print("2. Item Management")
+        print("3. Inventory Viewing")
+        print("4. Transaction Processing")
+        print("5. Exit")
+
+        choice = input("Enter Choice: ")
+
+        if choice == "1":
+            member_management()
+        elif choice == "2":
+            item_management()
+        elif choice == "3":
+            inventory_viewing()
+        elif choice == "4":
+            transaction_processing()
+        elif choice == "5":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
